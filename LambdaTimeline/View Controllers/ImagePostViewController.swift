@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class ImagePostViewController: ShiftableViewController {
+class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class ImagePostViewController: ShiftableViewController {
         imagePicker.delegate = self
         
         imagePicker.sourceType = .photoLibrary
-
+        
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -58,8 +58,8 @@ class ImagePostViewController: ShiftableViewController {
         
         guard let imageData = imageView.image?.jpegData(compressionQuality: 0.1),
             let title = titleTextField.text, title != "" else {
-            presentInformationalAlertController(title: "Uh-oh", message: "Make sure that you add a photo and a caption before posting.")
-            return
+                presentInformationalAlertController(title: "Uh-oh", message: "Make sure that you add a photo and a caption before posting.")
+                return
         }
         
         postController.createPost(with: title, ofType: .image, mediaData: imageData, ratio: imageView.image?.ratio) { (success) in
@@ -111,7 +111,23 @@ class ImagePostViewController: ShiftableViewController {
         
         view.layoutSubviews()
     }
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditImage"{
+            guard let destinationVC = segue.destination as? EditImageViewController,
+                let image = imageView.image else {return}
+            
+            destinationVC.image = image
+            destinationVC.delegate = self
+        }
+    }
     
+    // MARK: - EditImageVCDelegate Method
+    func finishImageEdit(image: UIImage) {
+        imageView.image = image
+    }
+    
+    // MARK: - Properties
     var postController: PostController!
     var post: Post?
     var imageData: Data?
@@ -126,7 +142,7 @@ class ImagePostViewController: ShiftableViewController {
 extension ImagePostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        
         chooseImageButton.setTitle("", for: [])
         
         picker.dismiss(animated: true, completion: nil)

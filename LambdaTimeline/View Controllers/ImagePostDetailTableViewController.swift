@@ -74,7 +74,8 @@ class ImagePostDetailTableViewController: UITableViewController {
         
         return cell
     }
-    
+
+    // MARK: - Properties
     var post: Post!
     var postController: PostController!
     var imageData: Data?
