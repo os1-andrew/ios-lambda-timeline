@@ -99,11 +99,76 @@
                     <connections>
                         <segue destination="1Aw-4e-BW2" kind="show" identifier="AddImagePost" id="jaI-fq-Woc"/>
                         <segue destination="OyM-8q-Icp" kind="show" identifier="ViewImagePost" id="hhs-es-AdQ"/>
+                        <segue destination="Acd-AQ-TrZ" kind="show" identifier="AddVideoPost" id="TNM-f8-EOS"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRz-lg-pQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1216.8" y="108.39580209895054"/>
+            <point key="canvasLocation" x="938" y="90"/>
+        </scene>
+        <!--Video Camera View Controller-->
+        <scene sceneID="fdY-J6-cJL">
+            <objects>
+                <viewController id="Acd-AQ-TrZ" customClass="VideoCameraViewController" customModule="LambdaTimeline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jwa-3N-4s5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f0b-b0-xwB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Video Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wDs-9Y-WIH">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tw-B7-4VO" customClass="VideoCameraPreviewView" customModule="LambdaTimeline" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="38" width="375" height="565"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-L7-f3a">
+                                <rect key="frame" x="150" y="542" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="G6A-k1-9HX"/>
+                                    <constraint firstAttribute="height" constant="75" id="HWa-jW-hiR"/>
+                                </constraints>
+                                <color key="tintColor" red="0.86518480329949243" green="0.23041722898098266" blue="0.00066552687025736839" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="Record"/>
+                                <connections>
+                                    <action selector="toggleRecord:" destination="Acd-AQ-TrZ" eventType="touchUpInside" id="MUC-S0-cpP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f0b-b0-xwB" firstAttribute="top" secondItem="3IG-pQ-4hw" secondAttribute="top" id="09Z-oP-alM"/>
+                            <constraint firstItem="lT7-L7-f3a" firstAttribute="centerX" secondItem="Jwa-3N-4s5" secondAttribute="centerX" id="8T2-hc-aNV"/>
+                            <constraint firstItem="3IG-pQ-4hw" firstAttribute="trailing" secondItem="f0b-b0-xwB" secondAttribute="trailing" id="MdP-Om-dpH"/>
+                            <constraint firstItem="f0b-b0-xwB" firstAttribute="leading" secondItem="3IG-pQ-4hw" secondAttribute="leading" id="Xr6-6F-muf"/>
+                            <constraint firstItem="3IG-pQ-4hw" firstAttribute="bottom" secondItem="lT7-L7-f3a" secondAttribute="bottom" constant="50" id="kRI-h5-Oki"/>
+                            <constraint firstItem="3IG-pQ-4hw" firstAttribute="bottom" secondItem="f0b-b0-xwB" secondAttribute="bottom" id="p7U-a5-d68"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3IG-pQ-4hw"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wZx-ZJ-k1U">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="oL5-cR-9gZ">
+                            <connections>
+                                <action selector="save:" destination="Acd-AQ-TrZ" id="XUG-FU-VUt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="previewView" destination="7tw-B7-4VO" id="xb4-NF-X1w"/>
+                        <outlet property="recordButton" destination="lT7-L7-f3a" id="xUU-kS-BIZ"/>
+                        <outlet property="titleInput" destination="wDs-9Y-WIH" id="QaA-aG-F4h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zaq-IF-CdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937" y="815"/>
         </scene>
         <!--Title-->
         <scene sceneID="kP9-yp-I8H">
@@ -380,7 +445,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFJ-OO-MVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="277.60000000000002" y="108.39580209895054"/>
+            <point key="canvasLocation" x="158" y="90"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="O74-ZV-TrY">
@@ -417,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xA4-1f-Wlf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450.39999999999998" y="107.49625187406298"/>
+            <point key="canvasLocation" x="-500" y="108"/>
         </scene>
         <!--Title-->
         <scene sceneID="9zi-Aq-zJI">
@@ -521,4 +586,7 @@
             <point key="canvasLocation" x="1968.8" y="472.71364317841085"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Record" width="116" height="116"/>
+    </resources>
 </document>
