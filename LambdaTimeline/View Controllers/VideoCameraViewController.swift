@@ -51,6 +51,22 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
         }
     }
     @IBAction func save(_ sender: Any) {
+        guard let finishedOutput = finishedOutput,
+            let finishedOutputURL = finishedOutput.outputFileURL,
+            let title = titleInput.text,
+        title != "" else{
+                presentInformationalAlertController(title: "Uh-oh", message: "Make sure that record a video and add a title before posting.")
+                return
+        }
+
+        let data = try! Data(contentsOf: finishedOutputURL)
+        postController.createPost(with: title, ofType: .video, mediaData: data
+        , ratio: 16/9) { (success) in
+            DispatchQueue.main.async {
+                self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")
+            }
+            return
+        }
         
     }
     //MARK: - AVCaptureFileOutputRecordingDelegate Methods
@@ -63,7 +79,7 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         DispatchQueue.main.async {
             self.recordButton.setImage(UIImage(named: "Stop"), for: .normal)
-            self.saveVideo(url: outputFileURL)
+            self.finishedOutput = output
         }
     }
     
@@ -125,8 +141,10 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
     }
     
     //MARK: - Properties
+    private var finishedOutput: AVCaptureFileOutput?
     private var captureSession:AVCaptureSession!
     private var recordOutput: AVCaptureMovieFileOutput!
+    var postController: PostController!
     
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var titleInput: UITextField!

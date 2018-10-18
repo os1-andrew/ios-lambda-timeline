@@ -62,6 +62,9 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
             loadImage(for: cell, forItemAt: indexPath)
             
             return cell
+        case .video:
+            return UICollectionViewCell()
+            //MARK: - TODO
         }
     }
     
@@ -75,6 +78,11 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
             
         case .image:
             
+            guard let ratio = post.ratio else { return size }
+            
+            size.height = size.width * ratio
+        case .video:
+            //MARK: - TODO
             guard let ratio = post.ratio else { return size }
             
             size.height = size.width * ratio
@@ -154,7 +162,12 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
             let destinationVC = segue.destination as? ImagePostViewController
             destinationVC?.postController = postController
             
-        } else if segue.identifier == "ViewImagePost" {
+        } else if segue.identifier == "AddVideoPost" {
+            let destinationVC = segue.destination as? VideoCameraViewController
+            destinationVC?.postController = postController
+            
+        }
+        else if segue.identifier == "ViewImagePost" {
             
             let destinationVC = segue.destination as? ImagePostDetailTableViewController
             
