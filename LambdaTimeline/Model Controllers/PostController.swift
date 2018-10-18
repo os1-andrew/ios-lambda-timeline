@@ -78,6 +78,7 @@ class PostController {
         
         ref.setValue(post.dictionaryRepresentation)
     }
+    
 
     private func store(mediaData: Data, mediaType: MediaType, completion: @escaping (URL?) -> Void) {
         
@@ -116,6 +117,8 @@ class PostController {
         
         uploadTask.resume()
     }
+    
+    //MARK: - Properties
     
     var posts: [Post] = []
     let currentUser = Auth.auth().currentUser

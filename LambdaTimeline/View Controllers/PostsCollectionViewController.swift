@@ -63,8 +63,11 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
             
             return cell
         case .video:
-            return UICollectionViewCell()
-            //MARK: - TODO
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoPostCell", for: indexPath) as? VideoCollectionViewCell else {return UICollectionViewCell()}
+            cell.post = post
+            loadVideo(for: cell, forItemAt: indexPath)
+            
+        return cell
         }
     }
     
@@ -82,7 +85,6 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
             
             size.height = size.width * ratio
         case .video:
-            //MARK: - TODO
             guard let ratio = post.ratio else { return size }
             
             size.height = size.width * ratio
@@ -105,6 +107,29 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
         
         guard let postID = postController.posts[indexPath.row].id else { return }
         operations[postID]?.cancel()
+    }
+    
+    func loadVideo(for videoPostCell: VideoCollectionViewCell, forItemAt indexPath: IndexPath) {
+        let post = postController.posts[indexPath.row]
+        // Create a reference to the file you want to download
+        guard let mediaID = post.id else {return}
+        let mediaRef = postController.storageRef.child(post.mediaType.rawValue).child(mediaID)
+        
+        let fm = FileManager.default
+        let documentsDir = try! fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
+        // Create local filesystem URL
+        let localURL = documentsDir.appendingPathComponent("videoCache")
+        
+        // Download to the local filesystem
+        let downloadTask = mediaRef.write(toFile: localURL) { url, error in
+            if let error = error {
+                NSLog("Error downloading video: \(error)")
+            } else {
+                videoPostCell.setVideo(with: url!)
+            }
+        }
+        
     }
     
     func loadImage(for imagePostCell: ImagePostCollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -154,6 +179,7 @@ class PostsCollectionViewController: UICollectionViewController, UICollectionVie
         
         operations[postID] = fetchOp
     }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -71,6 +71,7 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
             guard let destinationVC = segue.destination as? VideoDetailViewController,
                 let outputFileURL = outputFileURL else {return}
             destinationVC.videoURL = outputFileURL
+            destinationVC.postController = postController
             
         }
     }

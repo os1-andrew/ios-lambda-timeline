@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class VideoCollectionViewCell: UICollectionViewCell {
     
@@ -17,7 +18,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-//        imageView.image = nil
+        videoPlayerView.player = nil
         titleLabel.text = ""
         authorLabel.text = ""
     }
@@ -36,8 +37,15 @@ class VideoCollectionViewCell: UICollectionViewCell {
         labelBackgroundView.clipsToBounds = true
     }
     
-    func setImage(_ image: UIImage?) {
+    func setVideo(with url: URL) {
         
+        let playerItem = AVPlayerItem(url: url)
+        let player = AVQueuePlayer(playerItem: playerItem)
+        videoPlayerView.player = player
+        
+        videoPlayerView.playerLooper = AVPlayerLooper(player: player, templateItem: playerItem)
+        
+        player.play()
     }
     
     var post: Post? {
