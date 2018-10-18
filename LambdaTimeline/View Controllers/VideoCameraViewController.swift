@@ -72,7 +72,7 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
                 let outputFileURL = outputFileURL else {return}
             destinationVC.videoURL = outputFileURL
             destinationVC.postController = postController
-            
+            destinationVC.postsCollectionVC = self.navigationController?.parent as? PostsCollectionViewController
         }
     }
     
@@ -104,6 +104,8 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
         let url = try! fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         return url.appendingPathComponent(UUID().uuidString).appendingPathExtension("mov")
     }
+    
+    
     
     //MARK: - Properties
     private var outputFileURL: URL?

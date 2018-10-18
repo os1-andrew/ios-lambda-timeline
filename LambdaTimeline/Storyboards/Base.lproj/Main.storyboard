@@ -249,11 +249,12 @@
                     <navigationItem key="navigationItem" id="0Rv-37-s59">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="klw-Vg-Zey">
                             <connections>
-                                <action selector="save:" destination="Xt7-5q-hjr" id="gzM-Uk-G45"/>
+                                <action selector="save:" destination="Xt7-5q-hjr" id="NtI-2m-Aqm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="saveButton" destination="klw-Vg-Zey" id="b91-Aa-aT2"/>
                         <outlet property="titleInput" destination="sLt-fW-7i6" id="3Vs-3N-Xnh"/>
                         <outlet property="videoPreviewView" destination="TeW-VS-6Dy" id="s6R-uJ-vh6"/>
                     </connections>

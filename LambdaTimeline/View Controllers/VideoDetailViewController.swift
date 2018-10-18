@@ -13,6 +13,7 @@ class VideoDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        saveButton.isEnabled = true
         updateViews()
         
         // Do any additional setup after loading the view.
@@ -23,17 +24,26 @@ class VideoDetailViewController: UIViewController {
             let title = titleInput.text,
             title != "" else {
                 presentInformationalAlertController(title: "Uh-oh", message: "Make sure that record a video and add a title before posting.")
+                updateViews()
                 return
         }
         
-        let data = try! Data(contentsOf: videoURL)
+        guard let data = try? Data(contentsOf: videoURL) else {return}
+        
         postController.createPost(with: title, ofType: .video, mediaData: data
-        , ratio: 16/9) { (success) in
+        , ratio: 9/16) { (success) in
             DispatchQueue.main.async {
-                self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")
+                if !success {
+                    self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")
+                } else {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
+            
             return
         }
+        saveButton.isEnabled = false
+        
     }
     //MARK: - Private Methods
     private func updateViews(){
@@ -50,10 +60,13 @@ class VideoDetailViewController: UIViewController {
         
         
     }
+
     
     //MARK: - Properties
+    var postsCollectionVC: PostsCollectionViewController?
     var videoURL: URL?
     var postController: PostController!
     @IBOutlet weak var videoPreviewView: VideoPlayerView!
     @IBOutlet weak var titleInput: UITextField!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
 }
