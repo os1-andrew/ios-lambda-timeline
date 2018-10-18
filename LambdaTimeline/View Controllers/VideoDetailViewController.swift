@@ -36,6 +36,7 @@ class VideoDetailViewController: UIViewController {
                 if !success {
                     self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")
                 } else {
+                    self.deleteTempVideoFile(at: videoURL)
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             }
@@ -56,11 +57,20 @@ class VideoDetailViewController: UIViewController {
         videoPreviewView.playerLooper = AVPlayerLooper(player: player, templateItem: playerItem)
         
         player.play()
-        
-        
-        
     }
-
+    private func deleteTempVideoFile(at url: URL){
+        let fm = FileManager.default
+        if (fm.isDeletableFile(atPath: url.path)){
+            do{
+                try fm.removeItem(at: url)
+                print("removed")
+            } catch {
+                NSLog("Error deleting original file")
+            }
+            
+        }
+    }
+    
     
     //MARK: - Properties
     var postsCollectionVC: PostsCollectionViewController?

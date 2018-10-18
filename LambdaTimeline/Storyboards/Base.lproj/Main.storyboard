@@ -91,7 +91,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZl-7E-cbE" customClass="VideoPlayerView" customModule="LambdaTimeline" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="52" width="359" height="277"/>
+                                            <rect key="frame" x="8" y="0.0" width="359" height="375"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdw-u0-e1g">
@@ -130,8 +130,8 @@
                                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="vdw-u0-e1g" secondAttribute="trailing" id="6X9-fh-vn1"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="tZl-7E-cbE" secondAttribute="trailing" id="Qnb-fp-AuG"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="vdw-u0-e1g" secondAttribute="bottom" id="YGn-bc-VHf"/>
-                                    <constraint firstAttribute="bottom" secondItem="tZl-7E-cbE" secondAttribute="bottom" constant="46" id="bHX-Hv-Iwz"/>
-                                    <constraint firstItem="tZl-7E-cbE" firstAttribute="top" secondItem="2jZ-Za-q9I" secondAttribute="top" constant="52" id="m2S-Xo-ODF"/>
+                                    <constraint firstAttribute="bottom" secondItem="tZl-7E-cbE" secondAttribute="bottom" id="bHX-Hv-Iwz"/>
+                                    <constraint firstItem="tZl-7E-cbE" firstAttribute="top" secondItem="2jZ-Za-q9I" secondAttribute="top" id="m2S-Xo-ODF"/>
                                     <constraint firstItem="vdw-u0-e1g" firstAttribute="leading" secondItem="2jZ-Za-q9I" secondAttribute="leadingMargin" id="rlW-gv-oWl"/>
                                     <constraint firstItem="tZl-7E-cbE" firstAttribute="leading" secondItem="2jZ-Za-q9I" secondAttribute="leadingMargin" id="rpQ-5f-vld"/>
                                 </constraints>
