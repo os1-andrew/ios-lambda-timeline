@@ -50,63 +50,27 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
             recordOutput.startRecording(to: newRecordingURL(), recordingDelegate: self)
         }
     }
-    @IBAction func save(_ sender: Any) {
-        guard let finishedOutput = finishedOutput,
-            let finishedOutputURL = finishedOutput.outputFileURL,
-            let title = titleInput.text,
-        title != "" else{
-                presentInformationalAlertController(title: "Uh-oh", message: "Make sure that record a video and add a title before posting.")
-                return
-        }
-
-        let data = try! Data(contentsOf: finishedOutputURL)
-        postController.createPost(with: title, ofType: .video, mediaData: data
-        , ratio: 16/9) { (success) in
-            DispatchQueue.main.async {
-                self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")
-            }
-            return
-        }
-        
-    }
     //MARK: - AVCaptureFileOutputRecordingDelegate Methods
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         DispatchQueue.main.async {
-            self.recordButton.setImage(UIImage(named: "Record"), for: .normal)
+            self.recordButton.setImage(UIImage(named: "Stop"), for: .normal)
         }
         
     }
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         DispatchQueue.main.async {
-            self.recordButton.setImage(UIImage(named: "Stop"), for: .normal)
-            self.finishedOutput = output
+            self.recordButton.setImage(UIImage(named: "Record"), for: .normal)
+            self.outputFileURL = outputFileURL
+            self.performSegue(withIdentifier: "ShowVideoDetail", sender: nil)
         }
     }
     
-    //MARK: Methods to be deleted
-    private func saveVideo(url: URL){
-        PHPhotoLibrary.requestAuthorization { (status) in
-            guard status == .authorized else {return}
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetCreationRequest.creationRequestForAssetFromVideo(atFileURL: url)
-            }, completionHandler: { (success, error) in
-                if let error = error {
-                    NSLog("Error saving video: \(error)")
-                    return
-                }
-                self.deleteTempVideoFile(at: url)
-            })
-        }
-    }
-    private func deleteTempVideoFile(at url: URL){
-        let fm = FileManager.default
-        if (fm.isDeletableFile(atPath: url.path)){
-            do{
-                try fm.removeItem(at: url)
-                print("removed")
-            } catch {
-                NSLog("Error deleting original file")
-            }
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowVideoDetail" {
+            guard let destinationVC = segue.destination as? VideoDetailViewController,
+                let outputFileURL = outputFileURL else {return}
+            destinationVC.videoURL = outputFileURL
             
         }
     }
@@ -141,12 +105,11 @@ class VideoCameraViewController: UIViewController, AVCaptureFileOutputRecordingD
     }
     
     //MARK: - Properties
-    private var finishedOutput: AVCaptureFileOutput?
+    private var outputFileURL: URL?
     private var captureSession:AVCaptureSession!
     private var recordOutput: AVCaptureMovieFileOutput!
     var postController: PostController!
     
     @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var previewView: VideoCameraPreviewView!
 }
