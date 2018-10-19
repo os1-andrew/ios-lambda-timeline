@@ -15,14 +15,31 @@ class VideoDetailViewController: UIViewController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         saveButton.isEnabled = true
+        includeLocation = false
         locationHelper.locationManager.delegate = self
         updateViews()
-        locationHelper.requestAuthorization()
-        locationHelper.getCurrentLocation()
         
         // Do any additional setup after loading the view.
     }
     //MARK: - IBAction
+    @IBAction func toggleGeoTag(_ sender: Any) {
+        locationHelper.requestAuthorization()
+
+        includeLocation = !includeLocation
+        if includeLocation{
+            locationHelper.getCurrentLocation()
+            geoTagButton.setTitle("Yes", for: .normal)
+            geoTagButton.isEnabled = false
+            saveButton.isEnabled = false
+        } else {
+            geoTagButton.setTitle("No", for: .normal)
+            geoTag = nil
+        }
+        
+        let labelText = includeLocation ? "Yes" : "No"
+        geoTagButton.setTitle(labelText,for: .normal)
+        
+    }
     @IBAction func save(_ sender: Any) {
         guard let videoURL = videoURL,
             let title = titleInput.text,
@@ -57,6 +74,8 @@ class VideoDetailViewController: UIViewController, CLLocationManagerDelegate {
             return
         }
         geoTag = location.coordinate
+        saveButton.isEnabled = true
+        geoTagButton.isEnabled = true
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         presentInformationalAlertController(title: "Error", message: "Unable to get your location. Please try again.")
@@ -93,9 +112,12 @@ class VideoDetailViewController: UIViewController, CLLocationManagerDelegate {
     var videoURL: URL?
     var postController: PostController!
     
+    private var includeLocation: Bool = false
     private var geoTag: CLLocationCoordinate2D?
     private let locationHelper = LocationHelper()
     @IBOutlet weak var videoPreviewView: VideoPlayerView!
     @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var geoTagButton: UIButton!
+    
 }

@@ -230,8 +230,26 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="R1c-DX-eC1">
+                                        <rect key="frame" x="0.0" y="38" width="414" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include my location:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iO-lA-atv">
+                                                <rect key="frame" x="0.0" y="0.0" width="346" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fq5-5c-KE2">
+                                                <rect key="frame" x="354" y="0.0" width="60" height="30"/>
+                                                <state key="normal" title="No"/>
+                                                <connections>
+                                                    <action selector="toggleGeoTag:" destination="Xt7-5q-hjr" eventType="touchUpInside" id="1nw-qp-eN7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TeW-VS-6Dy" customClass="VideoPlayerView" customModule="LambdaTimeline" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="38" width="414" height="720"/>
+                                        <rect key="frame" x="0.0" y="76" width="414" height="682"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -254,6 +272,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="geoTagButton" destination="Fq5-5c-KE2" id="Fxi-qZ-epm"/>
                         <outlet property="saveButton" destination="klw-Vg-Zey" id="b91-Aa-aT2"/>
                         <outlet property="titleInput" destination="sLt-fW-7i6" id="3Vs-3N-Xnh"/>
                         <outlet property="videoPreviewView" destination="TeW-VS-6Dy" id="s6R-uJ-vh6"/>
