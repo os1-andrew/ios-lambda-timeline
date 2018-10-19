@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MapKit
 
 class VideoDetailViewController: UIViewController {
     
@@ -30,7 +31,11 @@ class VideoDetailViewController: UIViewController {
         
         guard let data = try? Data(contentsOf: videoURL) else {return}
         
-        postController.createPost(with: title, ofType: .video, mediaData: data
+        //TODO: Fix with actual geoTag
+        
+        let geoTag = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        
+        postController.createPost(with: title, geoTag: geoTag, ofType: .video, mediaData: data
         , ratio: 9/16) { (success) in
             DispatchQueue.main.async {
                 if !success {

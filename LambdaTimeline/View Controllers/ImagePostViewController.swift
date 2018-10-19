@@ -61,8 +61,10 @@ class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
                 presentInformationalAlertController(title: "Uh-oh", message: "Make sure that you add a photo and a caption before posting.")
                 return
         }
+        //TODO: remove add geoTag input
+        let geoTag = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         
-        postController.createPost(with: title, ofType: .image, mediaData: imageData, ratio: imageView.image?.ratio) { (success) in
+        postController.createPost(with: title, geoTag: geoTag, ofType: .image, mediaData: imageData, ratio: imageView.image?.ratio) { (success) in
             guard success else {
                 DispatchQueue.main.async {
                     self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")

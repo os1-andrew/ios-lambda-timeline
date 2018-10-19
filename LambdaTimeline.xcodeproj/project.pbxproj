@@ -13,6 +13,7 @@
 		1000DCF2217849F80041949D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000DCF1217849F80041949D /* VideoPlayerView.swift */; };
 		1000DCF421784DAB0041949D /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000DCF321784DAB0041949D /* VideoDetailViewController.swift */; };
 		1025A6C6217532A2001A77D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1025A6C5217532A2001A77D6 /* GoogleService-Info.plist */; };
+		10291404217985E20074EB3B /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10291403217985E20074EB3B /* PostAnnotation.swift */; };
 		103E30A6217690BA003A6AE5 /* EditImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103E30A5217690BA003A6AE5 /* EditImageViewController.swift */; };
 		4646377C216FDE4B00E7FF73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646377B216FDE4B00E7FF73 /* AppDelegate.swift */; };
 		46463781216FDE4B00E7FF73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4646377F216FDE4B00E7FF73 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		1000DCF1217849F80041949D /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		1000DCF321784DAB0041949D /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
 		1025A6C5217532A2001A77D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10291403217985E20074EB3B /* PostAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAnnotation.swift; sourceTree = "<group>"; };
 		103E30A5217690BA003A6AE5 /* EditImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImageViewController.swift; sourceTree = "<group>"; };
 		33A2B89DE9E21538434BD640 /* Pods-LambdaTimeline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LambdaTimeline.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LambdaTimeline/Pods-LambdaTimeline.debug.xcconfig"; sourceTree = "<group>"; };
 		46463778216FDE4B00E7FF73 /* LambdaTimeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LambdaTimeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				4646378F216FFD1B00E7FF73 /* Post.swift */,
+				10291403217985E20074EB3B /* PostAnnotation.swift */,
 				46CFE6FA21714E6100E7FF73 /* Author.swift */,
 				46463791216FFDD900E7FF73 /* Comment.swift */,
 			);
@@ -400,6 +403,7 @@
 				1000DCF021783CD10041949D /* VideoCollectionViewCell.swift in Sources */,
 				46CFE6F521707D0000E7FF73 /* ImagePostViewController.swift in Sources */,
 				46CFE6FF2171556D00E7FF73 /* ConcurrentOperation.swift in Sources */,
+				10291404217985E20074EB3B /* PostAnnotation.swift in Sources */,
 				46463790216FFD1B00E7FF73 /* Post.swift in Sources */,
 				103E30A6217690BA003A6AE5 /* EditImageViewController.swift in Sources */,
 				46CFE6F32170757F00E7FF73 /* User+DictionaryRepresentation.swift in Sources */,
