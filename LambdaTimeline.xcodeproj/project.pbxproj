@@ -15,6 +15,9 @@
 		1025A6C6217532A2001A77D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1025A6C5217532A2001A77D6 /* GoogleService-Info.plist */; };
 		10291404217985E20074EB3B /* Post + Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10291403217985E20074EB3B /* Post + Map.swift */; };
 		102914062179892A0074EB3B /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102914052179892A0074EB3B /* LocationHelper.swift */; };
+		102914082179A3B30074EB3B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102914072179A3B30074EB3B /* MapViewController.swift */; };
+		1029140A2179A4330074EB3B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102914092179A4330074EB3B /* MainTabBarViewController.swift */; };
+		1029140C2179B2BE0074EB3B /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029140B2179B2BE0074EB3B /* PostDetailView.swift */; };
 		103E30A6217690BA003A6AE5 /* EditImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103E30A5217690BA003A6AE5 /* EditImageViewController.swift */; };
 		4646377C216FDE4B00E7FF73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646377B216FDE4B00E7FF73 /* AppDelegate.swift */; };
 		46463781216FDE4B00E7FF73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4646377F216FDE4B00E7FF73 /* Main.storyboard */; };
@@ -50,6 +53,9 @@
 		1025A6C5217532A2001A77D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10291403217985E20074EB3B /* Post + Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post + Map.swift"; sourceTree = "<group>"; };
 		102914052179892A0074EB3B /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		102914072179A3B30074EB3B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		102914092179A4330074EB3B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		1029140B2179B2BE0074EB3B /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		103E30A5217690BA003A6AE5 /* EditImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImageViewController.swift; sourceTree = "<group>"; };
 		33A2B89DE9E21538434BD640 /* Pods-LambdaTimeline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LambdaTimeline.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LambdaTimeline/Pods-LambdaTimeline.debug.xcconfig"; sourceTree = "<group>"; };
 		46463778216FDE4B00E7FF73 /* LambdaTimeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LambdaTimeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +188,8 @@
 				103E30A5217690BA003A6AE5 /* EditImageViewController.swift */,
 				1000DCEB2177C7610041949D /* VideoCameraViewController.swift */,
 				1000DCF321784DAB0041949D /* VideoDetailViewController.swift */,
+				102914072179A3B30074EB3B /* MapViewController.swift */,
+				102914092179A4330074EB3B /* MainTabBarViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -193,6 +201,7 @@
 				1000DCED2177C77B0041949D /* VideoCameraPreviewView.swift */,
 				1000DCEF21783CD10041949D /* VideoCollectionViewCell.swift */,
 				1000DCF1217849F80041949D /* VideoPlayerView.swift */,
+				1029140B2179B2BE0074EB3B /* PostDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -402,6 +411,7 @@
 				1000DCF421784DAB0041949D /* VideoDetailViewController.swift in Sources */,
 				4646377C216FDE4B00E7FF73 /* AppDelegate.swift in Sources */,
 				1000DCEE2177C77B0041949D /* VideoCameraPreviewView.swift in Sources */,
+				1029140A2179A4330074EB3B /* MainTabBarViewController.swift in Sources */,
 				46CFE6FD217154F500E7FF73 /* Networking.swift in Sources */,
 				1000DCF021783CD10041949D /* VideoCollectionViewCell.swift in Sources */,
 				46CFE6F521707D0000E7FF73 /* ImagePostViewController.swift in Sources */,
@@ -416,6 +426,7 @@
 				1000DCEC2177C7610041949D /* VideoCameraViewController.swift in Sources */,
 				46CFE7032171572600E7FF73 /* ImagePostCollectionViewCell.swift in Sources */,
 				4646379C2170091A00E7FF73 /* PostController.swift in Sources */,
+				1029140C2179B2BE0074EB3B /* PostDetailView.swift in Sources */,
 				464637992170048900E7FF73 /* FirebaseConvertible.swift in Sources */,
 				46A0366A21700F5100E7FF73 /* PostsCollectionViewController.swift in Sources */,
 				46D571F52173CF3E00E7FF73 /* UIImage+Ratio.swift in Sources */,
@@ -423,6 +434,7 @@
 				102914062179892A0074EB3B /* LocationHelper.swift in Sources */,
 				46CFE6F721707FA600E7FF73 /* UIViewController+InformationalAlert.swift in Sources */,
 				1000DCF2217849F80041949D /* VideoPlayerView.swift in Sources */,
+				102914082179A3B30074EB3B /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

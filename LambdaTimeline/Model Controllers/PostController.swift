@@ -13,6 +13,7 @@ import FirebaseStorage
 import MapKit
 
 class PostController {
+    static let shared = PostController()
     
     func createPost(with title: String, geoTag: CLLocationCoordinate2D?, ofType mediaType: MediaType, mediaData: Data, ratio: CGFloat? = nil, completion: @escaping (Bool) -> Void = { _ in }) {
         
