@@ -18,22 +18,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         geoTaggedPosts = postController.posts.compactMap{
             $0.geoTag != nil ? $0 : nil
         }
-        updateView()
+        updateAnnotations()
     }
     
     //MARK: - MKMapViewDelegeMethods
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        updateAnnotations()
+    }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let result = mapView.dequeueReusableAnnotationView(withIdentifier: "PostAnnotationView", for: annotation)
+        guard let post = annotation as? Post,
+            let result = mapView.dequeueReusableAnnotationView(withIdentifier: "PostAnnotationView", for: annotation) as? MKMarkerAnnotationView else {return nil}
+        result.canShowCallout = true
+        let detailView = PostDetailView(frame: .zero)
+        result.detailCalloutAccessoryView = detailView
+        detailView.post = post
         
         return result
     }
     //MARK: - Private Methods
-    private func updateView(){
+    private func updateAnnotations(){
         mapView.addAnnotations(geoTaggedPosts)
     }
-    private func updateAnnotationView(for annotation: MKAnnotation){
 
-    }
     //MARK: - Properties
     let postController = PostController.shared
     var geoTaggedPosts = [Post]()
