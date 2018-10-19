@@ -8,14 +8,15 @@
 
 import UIKit
 import Photos
+import MapKit
 
-class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
+class ImagePostViewController: ShiftableViewController, EditImageVCDelegate, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        includeLocation = false
         setImageViewHeight(with: 1.0)
-        
+        locationHelper.locationManager.delegate = self
         updateViews()
     }
     
@@ -52,6 +53,23 @@ class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func toggleGeoTag(_ sender: Any) {
+        locationHelper.requestAuthorization()
+        
+        includeLocation = !includeLocation
+        if includeLocation{
+            locationHelper.getCurrentLocation()
+            geoTagButton.setTitle("Yes", for: .normal)
+            geoTagButton.isEnabled = false
+            postButton.isEnabled = false
+        } else {
+            geoTagButton.setTitle("No", for: .normal)
+            geoTag = nil
+        }
+        
+        let labelText = includeLocation ? "Yes" : "No"
+        geoTagButton.setTitle(labelText,for: .normal)
+    }
     @IBAction func createPost(_ sender: Any) {
         
         view.endEditing(true)
@@ -61,9 +79,7 @@ class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
                 presentInformationalAlertController(title: "Uh-oh", message: "Make sure that you add a photo and a caption before posting.")
                 return
         }
-        //TODO: remove add geoTag input
-        let geoTag = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        
+
         postController.createPost(with: title, geoTag: geoTag, ofType: .image, mediaData: imageData, ratio: imageView.image?.ratio) { (success) in
             guard success else {
                 DispatchQueue.main.async {
@@ -113,6 +129,21 @@ class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
         
         view.layoutSubviews()
     }
+    //MARK: - CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            NSLog("Empty location array")
+            return
+        }
+        geoTag = location.coordinate
+        postButton.isEnabled = true
+        geoTagButton.isEnabled = true
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        presentInformationalAlertController(title: "Error", message: "Unable to get your location. Please try again.")
+        NSLog("Error getting location: \(error)")
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditImage"{
@@ -133,12 +164,16 @@ class ImagePostViewController: ShiftableViewController, EditImageVCDelegate {
     var postController: PostController!
     var post: Post?
     var imageData: Data?
+    private let locationHelper = LocationHelper()
+    private var includeLocation = false
+    private var geoTag: CLLocationCoordinate2D?
     
+    @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var chooseImageButton: UIButton!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var postButton: UIBarButtonItem!
+    @IBOutlet weak var geoTagButton: UIButton!
 }
 
 extension ImagePostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

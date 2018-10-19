@@ -336,18 +336,38 @@
                                         <rect key="frame" x="168.5" y="463" width="77" height="30"/>
                                         <state key="normal" title="Post Image"/>
                                         <connections>
-                                            <action selector="createPost:" destination="1Aw-4e-BW2" eventType="touchUpInside" id="mif-fi-p6s"/>
+                                            <action selector="createPost:" destination="1Aw-4e-BW2" eventType="touchUpInside" id="eMt-X6-Ebs"/>
                                         </connections>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NIC-WO-jCj">
+                                        <rect key="frame" x="8" y="421" width="190.5" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include my location:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYL-pg-aS3">
+                                                <rect key="frame" x="0.0" y="0.0" width="152.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUJ-Sx-KMr">
+                                                <rect key="frame" x="160.5" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="No"/>
+                                                <connections>
+                                                    <action selector="toggleGeoTag:" destination="1Aw-4e-BW2" eventType="touchUpInside" id="gDD-VC-tMj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PkI-rS-ua9" secondAttribute="trailing" id="1cC-FG-cAC"/>
                                     <constraint firstItem="PkI-rS-ua9" firstAttribute="top" secondItem="9qd-If-ddw" secondAttribute="top" id="3tV-sW-NF1"/>
+                                    <constraint firstItem="NIC-WO-jCj" firstAttribute="top" secondItem="PkI-rS-ua9" secondAttribute="bottom" constant="8" id="DH4-9D-ApR"/>
                                     <constraint firstItem="sUn-2T-XF9" firstAttribute="centerX" secondItem="9qd-If-ddw" secondAttribute="centerX" id="J3W-K0-FHr"/>
                                     <constraint firstItem="PkI-rS-ua9" firstAttribute="leading" secondItem="9qd-If-ddw" secondAttribute="leading" id="bPK-xN-eaO"/>
                                     <constraint firstAttribute="bottom" secondItem="PkI-rS-ua9" secondAttribute="bottom" id="cfV-7c-ubK"/>
                                     <constraint firstItem="PkI-rS-ua9" firstAttribute="width" secondItem="9qd-If-ddw" secondAttribute="width" id="dWh-6N-mO7"/>
                                     <constraint firstAttribute="height" priority="250" constant="603" id="qMm-7B-8rp"/>
+                                    <constraint firstItem="iUJ-Sx-KMr" firstAttribute="leading" secondItem="sUn-2T-XF9" secondAttribute="leading" id="r3o-jW-0aG"/>
                                     <constraint firstItem="sUn-2T-XF9" firstAttribute="top" secondItem="PkI-rS-ua9" secondAttribute="bottom" constant="50" id="vLK-Ay-ULu"/>
                                 </constraints>
                             </scrollView>
@@ -371,8 +391,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chooseImageButton" destination="VxD-cu-jHT" id="KVs-no-MbU"/>
+                        <outlet property="geoTagButton" destination="iUJ-Sx-KMr" id="Ipa-7T-rlQ"/>
                         <outlet property="imageHeightConstraint" destination="MHD-wr-Gq9" id="HyG-8g-Ck1"/>
                         <outlet property="imageView" destination="4eK-5F-H5h" id="e7m-c5-Xhz"/>
+                        <outlet property="postButton" destination="sUn-2T-XF9" id="GdR-nm-9cb"/>
                         <outlet property="titleTextField" destination="Op6-OA-6Ou" id="JEe-cj-4mv"/>
                     </connections>
                 </viewController>

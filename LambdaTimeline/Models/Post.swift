@@ -36,12 +36,13 @@ class Post: NSObject{
             let author = Author(dictionary: authorDictionary),
             let timestampTimeInterval = dictionary[Post.timestampKey] as? TimeInterval,
             let captionDictionaries = dictionary[Post.commentsKey] as? [[String: Any]] else { return nil }
-       
+        
         if let geoLongitude = dictionary[Post.geoLongitudeKey] as? Double,
             let geoLatitude = dictionary[Post.geoLatitudeKey] as? Double {
-        self.geoTag = CLLocationCoordinate2D(latitude: geoLatitude, longitude: geoLongitude)
+            self.geoTag = CLLocationCoordinate2D(latitude: geoLatitude, longitude: geoLongitude)
+        } else {
+            self.geoTag = nil
         }
-        self.geoTag = nil
         self.mediaURL = mediaURL
         self.mediaType = mediaType
         self.ratio = dictionary[Post.ratioKey] as? CGFloat
@@ -54,11 +55,11 @@ class Post: NSObject{
     var dictionaryRepresentation: [String : Any?] {
         var dict: [String: Any?] = [Post.mediaKey: mediaURL.absoluteString,
                                     Post.geoLongitudeKey: geoTag?.longitude,
-                                   Post.geoLatitudeKey: geoTag?.latitude,
-                                   Post.mediaTypeKey: mediaType.rawValue,
-                                   Post.commentsKey: comments.map({ $0.dictionaryRepresentation }),
-                                   Post.authorKey: author.dictionaryRepresentation,
-                                   Post.timestampKey: timestamp.timeIntervalSince1970]
+                                    Post.geoLatitudeKey: geoTag?.latitude,
+                                    Post.mediaTypeKey: mediaType.rawValue,
+                                    Post.commentsKey: comments.map({ $0.dictionaryRepresentation }),
+                                    Post.authorKey: author.dictionaryRepresentation,
+                                    Post.timestampKey: timestamp.timeIntervalSince1970]
         
         guard let ratio = self.ratio else { return dict }
         
