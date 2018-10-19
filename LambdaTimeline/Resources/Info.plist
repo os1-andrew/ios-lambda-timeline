@@ -51,6 +51,8 @@
 	<string>LambdaTimeline needs access to the camera in order to record video</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>LambdaTimeline needs access to the camera in order to record video</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>LambdaTimeline needs access to your location in order to geotag your posts</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

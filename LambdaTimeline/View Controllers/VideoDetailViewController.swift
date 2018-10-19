@@ -10,12 +10,15 @@ import UIKit
 import AVFoundation
 import MapKit
 
-class VideoDetailViewController: UIViewController {
+class VideoDetailViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         saveButton.isEnabled = true
+        locationHelper.locationManager.delegate = self
         updateViews()
+        locationHelper.requestAuthorization()
+        locationHelper.getCurrentLocation()
         
         // Do any additional setup after loading the view.
     }
@@ -30,10 +33,6 @@ class VideoDetailViewController: UIViewController {
         }
         
         guard let data = try? Data(contentsOf: videoURL) else {return}
-        
-        //TODO: Fix with actual geoTag
-        
-        let geoTag = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         
         postController.createPost(with: title, geoTag: geoTag, ofType: .video, mediaData: data
         , ratio: 9/16) { (success) in
@@ -50,6 +49,18 @@ class VideoDetailViewController: UIViewController {
         }
         saveButton.isEnabled = false
         
+    }
+    //MARK: - CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            NSLog("Empty location array")
+            return
+        }
+        geoTag = location.coordinate
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        presentInformationalAlertController(title: "Error", message: "Unable to get your location. Please try again.")
+        NSLog("Error getting location: \(error)")
     }
     //MARK: - Private Methods
     private func updateViews(){
@@ -81,6 +92,9 @@ class VideoDetailViewController: UIViewController {
     var postsCollectionVC: PostsCollectionViewController?
     var videoURL: URL?
     var postController: PostController!
+    
+    private var geoTag: CLLocationCoordinate2D?
+    private let locationHelper = LocationHelper()
     @IBOutlet weak var videoPreviewView: VideoPlayerView!
     @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!

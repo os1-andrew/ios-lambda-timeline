@@ -14,7 +14,7 @@ import MapKit
 
 class PostController {
     
-    func createPost(with title: String, geoTag: CLLocationCoordinate2D, ofType mediaType: MediaType, mediaData: Data, ratio: CGFloat? = nil, completion: @escaping (Bool) -> Void = { _ in }) {
+    func createPost(with title: String, geoTag: CLLocationCoordinate2D?, ofType mediaType: MediaType, mediaData: Data, ratio: CGFloat? = nil, completion: @escaping (Bool) -> Void = { _ in }) {
         
         guard let currentUser = Auth.auth().currentUser,
             let author = Author(user: currentUser) else { return }
@@ -51,7 +51,7 @@ class PostController {
         
         postsRef.observe(.value, with: { (snapshot) in
             
-            guard let postDictionaries = snapshot.value as? [String: [String: Any]] else { return }
+            guard let postDictionaries = snapshot.value as? [String: [String: Any?]] else { return }
             
             var posts: [Post] = []
             

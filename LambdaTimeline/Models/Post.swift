@@ -27,7 +27,7 @@ class Post: NSObject{
         self.timestamp = timestamp
     }
     
-    init?(dictionary: [String : Any], id: String) {
+    init?(dictionary: [String : Any?], id: String) {
         guard let mediaURLString = dictionary[Post.mediaKey] as? String,
             let mediaURL = URL(string: mediaURLString),
             let mediaTypeString = dictionary[Post.mediaTypeKey] as? String,
@@ -53,7 +53,7 @@ class Post: NSObject{
     
     var dictionaryRepresentation: [String : Any?] {
         var dict: [String: Any?] = [Post.mediaKey: mediaURL.absoluteString,
-                                   Post.geoLongitudeKey: geoTag?.longitude,
+                                    Post.geoLongitudeKey: geoTag?.longitude,
                                    Post.geoLatitudeKey: geoTag?.latitude,
                                    Post.mediaTypeKey: mediaType.rawValue,
                                    Post.commentsKey: comments.map({ $0.dictionaryRepresentation }),
